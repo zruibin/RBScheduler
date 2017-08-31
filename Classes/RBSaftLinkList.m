@@ -86,7 +86,7 @@
     pthread_mutex_unlock(&_mutex);
 }
 
-- (NSUInteger)lenth
+- (NSUInteger)length
 {
     pthread_mutex_lock(&_mutex);
     NSUInteger lenth = [_linkedList count];

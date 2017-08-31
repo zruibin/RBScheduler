@@ -11,7 +11,7 @@
 
 @interface RBSaftLinkList : NSObject
 
-@property(nonatomic, assign, readonly, getter=lenth) NSUInteger count;
+@property(nonatomic, assign, readonly, getter=length) NSUInteger count;
 
 
 /**
@@ -67,16 +67,16 @@
 - (void)removeObject:(RBSchedulerObject *)obj;
 
 /**
- Get the length of queue
+ Get the current length of queue
 
- @return the length of queue
+ @return the current length of queue
  */
-- (NSUInteger)lenth;
+- (NSUInteger)length;
 
 /**
- Get the size of queue
+ Get the capacity of queue
  
- @return the size of queue
+ @return the capacity of queue
  */
 - (NSUInteger)size;
 
