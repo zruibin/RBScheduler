@@ -28,12 +28,29 @@
     button.frame = CGRectMake(100, 100, 100, 60);
     [button addTarget:self action:@selector(action) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationAction:) name:@"updateLabel" object:nil];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(100, 200, 100, 40)];
+    label.backgroundColor = [UIColor yellowColor];
+    label.text = @"label...";
+    label.tag = 10001;
+    [self.view addSubview:label];
 }
 
 - (void)action
 {
     [self.navigationController pushViewController:[TestController new] animated:YES];
 }
+
+- (void)notificationAction:(NSNotification *)notification
+{
+    NSLog(@"thread: %d", [[NSThread currentThread] isMainThread]);
+    NSString *str = [NSString stringWithFormat:@"%@", notification.object];
+    NSLog(@"updateLabel notification....%@", str);
+    UILabel *label = (UILabel *)[self.view viewWithTag:10001];
+    label.text = str;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
