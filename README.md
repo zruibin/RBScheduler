@@ -18,15 +18,15 @@ Just add the RBScheduler folder to your project.
 or use [CocoaPods](https://cocoapods.org) with Podfile:
 
 ``` ruby
- pod 'RBScheduler', :git => 'https://github.com/zruibin/RBScheduler.git'
+pod 'RBScheduler', :git => 'https://github.com/zruibin/RBScheduler.git'
 or
- pod 'RBScheduler', :git => 'https://github.com/zruibin/RBScheduler.git', :tag => '1.0.0'
+pod 'RBScheduler', :git => 'https://github.com/zruibin/RBScheduler.git', :tag => '1.0.0'
 ```
 
 or [Carthage](https://github.com/Carthage/Carthage) users can simply add to their `Cartfile`:
 
 ```
-github "zruibin/RBSchedule"
+github "zruibin/RBScheduler"
 ```
 
 ## Usage
