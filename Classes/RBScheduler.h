@@ -20,6 +20,12 @@
  */
 - (void)run;
 
+
+/**
+ 添加并执行调度任务
+
+ @param schedulerObject 任务对象
+ */
 - (void)runTask:(RBSchedulerObject *)schedulerObject;
 
 @end

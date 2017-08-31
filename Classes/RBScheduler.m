@@ -9,7 +9,7 @@
 #import "RBScheduler.h"
 #import "RBSaftLinkList.h"
 
-static NSString * const CRA_SCHEDULER_QUEUE_NAME = @"scheduler.queue.creaction";
+static NSString * const CRA_SCHEDULER_QUEUE_NAME = @"scheduler.queue.RBScheduler";
 static const NSUInteger sizeOfQueue = 1500;
 
 @interface RBScheduler ()
@@ -71,15 +71,10 @@ static const NSUInteger sizeOfQueue = 1500;
                 dispatch_semaphore_signal(self.runSemaphore);
                 dispatch_semaphore_wait(self.taskSemaphore, DISPATCH_TIME_FOREVER);
             } else {
-                //*
-                NSLog(@"run.....");
-                __weak typeof(RBScheduler *) wself = self;
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2ull *NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                    //任务完成后执行，可用于延时等待的任务完成*
-                    NSLog(@"over.....");
-                    dispatch_semaphore_signal(wself.runSemaphore);
-                });
-                //*/
+//                __weak typeof(RBScheduler *) wself = self;
+                if (schedulerObj.schedulerBlock()) {
+                    dispatch_semaphore_signal(self.runSemaphore);
+                }
             }
         }
     }
