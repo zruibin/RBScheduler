@@ -7,7 +7,8 @@
 //
 
 #import "ViewController.h"
-#import "RBScheduler.h"
+#import "TestController.h"
+
 
 @interface ViewController ()
 
@@ -19,22 +20,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [NSThread detachNewThreadSelector:@selector(startTaskThread) toTarget:self withObject:nil];
-    [[RBScheduler sharedInstance] run];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.backgroundColor = [UIColor blueColor];
+    [button setTitle:@"push" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor yellowColor] forState:UIControlStateHighlighted];
+    button.frame = CGRectMake(100, 100, 100, 60);
+    [button addTarget:self action:@selector(action) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
 }
 
-- (void)startTaskThread
+- (void)action
 {
-    NSInteger i = 0;
-    while (1) {
-        [NSThread sleepForTimeInterval:5];
-        [[RBScheduler sharedInstance] runTask:[NSObject new]];
-        ++i;
-        if (i > 5) {
-            NSLog(@"break...");
-            break;
-        }
-    }
+    [self.navigationController pushViewController:[TestController new] animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
