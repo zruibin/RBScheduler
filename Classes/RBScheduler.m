@@ -9,7 +9,7 @@
 #import "RBScheduler.h"
 #import "RBSaftLinkList.h"
 
-static NSString * const CRA_SCHEDULER_QUEUE_NAME = @"scheduler.queue.RBScheduler";
+static NSString * const SCHEDULER_QUEUE_NAME = @"scheduler.queue.RBScheduler";
 static const NSUInteger sizeOfQueue = 1500;
 
 @interface RBScheduler ()
@@ -61,7 +61,7 @@ static const NSUInteger sizeOfQueue = 1500;
 - (void)startTaskThread
 {
     /*常驻线程，串行执行*/
-    [[NSThread currentThread] setName:CRA_SCHEDULER_QUEUE_NAME];
+    [[NSThread currentThread] setName:SCHEDULER_QUEUE_NAME];
     while (YES) {
         @autoreleasepool {
             dispatch_semaphore_wait(self.runSemaphore, DISPATCH_TIME_FOREVER);
@@ -72,7 +72,11 @@ static const NSUInteger sizeOfQueue = 1500;
                 dispatch_semaphore_wait(self.taskSemaphore, DISPATCH_TIME_FOREVER);
             } else {
 //                __weak typeof(RBScheduler *) wself = self;
-                if (schedulerObj.schedulerBlock()) {
+                if (schedulerObj.schedulerBlock) {
+                    if (schedulerObj.schedulerBlock() == YES) {
+                        dispatch_semaphore_signal(self.runSemaphore);
+                    }
+                } else {
                     dispatch_semaphore_signal(self.runSemaphore);
                 }
             }

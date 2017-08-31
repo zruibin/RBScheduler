@@ -32,11 +32,11 @@
     NSInteger i = 0;
     while (1) {
         RBSchedulerObject *obj = [RBSchedulerObject new];
-        [obj setSchedulerBlock:^{
-            [NSThread sleepForTimeInterval:2];
-            NSLog(@"obj block run....");
-            return YES;
-        }];
+//        [obj setSchedulerBlock:^{
+//            [NSThread sleepForTimeInterval:2];
+//            NSLog(@"obj block run....");
+//            return YES;
+//        }];
         [[RBScheduler sharedInstance] runTask:obj];
         ++i;
         if (i > 5) {
