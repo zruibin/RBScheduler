@@ -13,40 +13,91 @@
 
 @property(nonatomic, assign, readonly, getter=lenth) NSUInteger count;
 
+
+/**
+ Factory method create RBSaftLinkList object
+
+ @param numItems the size of queue
+ @return RBSaftLinkList object
+ */
 + (RBSaftLinkList *)CreateQueueWithCapacity:(NSUInteger)numItems;
 
+/**
+ Initialization queue
+
+ @param numItems the size of queue
+ @return RBSaftLinkList object
+ */
 - (instancetype)initWithCapacity:(NSUInteger)numItems;
 
-/*将元素插入到队尾*/
+/**
+ Insert elements into the end of the queue
+
+ @param obj Task object
+ */
 - (void)insertObject:(RBSchedulerObject *)obj;
 
-/*将元素插入到队头*/
+/**
+ Insert an element into the header
+
+ @param obj  Task object
+ */
 - (void)insertHeadOfList:(RBSchedulerObject *)obj;
 
-/*将元素插入到指定位置*/
+/**
+ Inserts an element into the specified location
+
+ @param obj Task object
+ @param index location
+ */
 - (void)insertObject:(RBSchedulerObject *)obj atIndex:(NSUInteger)index;
 
-/*出队*/
+/**
+ dequeue
+
+ @return Task object
+ */
 - (RBSchedulerObject *)dequeueObject;
 
-/*移除元素*/
+/**
+ Removing Elements
+
+ @param obj Task object
+ */
 - (void)removeObject:(RBSchedulerObject *)obj;
 
-/*获取数组长度*/
+/**
+ Get the length of queue
+
+ @return the length of queue
+ */
 - (NSUInteger)lenth;
 
-/*获取数组总容量*/
+/**
+ Get the size of queue
+ 
+ @return the size of queue
+ */
 - (NSUInteger)size;
 
-/*检测数组是否为空*/
+/**
+ Checking if the queue is empty
+
+ @return result
+ */
 - (BOOL)isEmpty;
 
-/*检测数组是否已满*/
+/**
+ Checking if the queue is full
+ 
+ @return result
+ */
 - (BOOL)isFull;
 
-/*清空数组内元素*/
+/**
+ Empty all elements
+ */
 - (void)clearLinkList;
-
 
 
 @end

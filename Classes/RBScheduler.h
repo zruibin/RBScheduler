@@ -16,15 +16,15 @@
 
 
 /**
- 启动任务调度器
+ Start task scheduler
  */
 - (void)run;
 
 
 /**
- 添加并执行调度任务
+ Add and execute scheduling tasks
 
- @param schedulerObject 任务对象
+ @param schedulerObject Task object
  */
 - (void)runTask:(RBSchedulerObject *)schedulerObject;
 
