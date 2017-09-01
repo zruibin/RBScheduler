@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RBSchedulerObject.h"
+
 
 @interface RBSaftLinkList : NSObject
 
@@ -33,38 +33,38 @@
 /**
  Insert elements into the end of the queue
 
- @param obj Task object
+ @param obj queue object
  */
-- (void)insertObject:(RBSchedulerObject *)obj;
+- (void)insertObject:(NSObject *)obj;
 
 /**
  Insert an element into the header
 
- @param obj  Task object
+ @param obj  queue object
  */
-- (void)insertHeadOfList:(RBSchedulerObject *)obj;
+- (void)insertHeadOfList:(NSObject *)obj;
 
 /**
  Inserts an element into the specified location
 
- @param obj Task object
+ @param obj queue object
  @param index location
  */
-- (void)insertObject:(RBSchedulerObject *)obj atIndex:(NSUInteger)index;
+- (void)insertObject:(NSObject *)obj atIndex:(NSUInteger)index;
 
 /**
  dequeue
 
- @return Task object
+ @return queue object
  */
-- (RBSchedulerObject *)dequeueObject;
+- (NSObject *)dequeueObject;
 
 /**
  Removing Elements
 
- @param obj Task object
+ @param obj queue object
  */
-- (void)removeObject:(RBSchedulerObject *)obj;
+- (void)removeObject:(NSObject *)obj;
 
 /**
  Get the current length of queue

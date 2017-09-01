@@ -1,5 +1,5 @@
 
-#RBScheduler
+<h2>RBScheduler</h2>
 
 A Mission Scheduler 
 
@@ -9,7 +9,7 @@ This project is maintained by Ruibin.Chow
 ## Requirements
 
 - iOS 8.0+
-- xcode 8
+- xcode 7
 
 ## Installation
 
@@ -43,18 +43,13 @@ github "zruibin/RBScheduler"
 2. handle you mission or delayed mission in you code
 
 ```objective-c
-RBSchedulerObject *obj = [RBSchedulerObject new];
-
-/*every mission, even delayed mission, but the return value of the scheduler block must be true, and then the scheduler can continue running.
+/*every mission, even delayed mission, but the return value of the scheduler block must be true, and then the scheduler can be continue running.
 
 NOTE: Reference cycles can be caused!!!
 */
-[obj setSchedulerBlock:^{
+[[RBScheduler sharedInstance] runTask:^BOOL{
     [NSThread sleepForTimeInterval:2];
     
     return YES;
 }];
-
-[[RBScheduler sharedInstance] runTask:obj];
-
 ```

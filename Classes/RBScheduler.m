@@ -9,6 +9,19 @@
 #import "RBScheduler.h"
 #import "RBSaftLinkList.h"
 
+@interface RBSchedulerObject : NSObject
+/**
+ The return value of the scheduler block must be true, and then the scheduler can be continue running.
+ NOTE: Reference cycles can be caused!!!
+ */
+@property (nonatomic, copy) BOOL (^ schedulerBlock)(void);
+@end
+
+@implementation RBSchedulerObject
+@end
+
+
+
 static NSString * const SCHEDULER_QUEUE_NAME = @"scheduler.queue.RBScheduler";
 static const NSUInteger sizeOfQueue = 1500;
 
@@ -66,7 +79,7 @@ static const NSUInteger sizeOfQueue = 1500;
         @autoreleasepool {
             dispatch_semaphore_wait(self.runSemaphore, DISPATCH_TIME_FOREVER);
             
-            RBSchedulerObject *schedulerObj = [self.taskList dequeueObject];
+            RBSchedulerObject *schedulerObj = (RBSchedulerObject *)[self.taskList dequeueObject];
             if (schedulerObj == nil) {
                 dispatch_semaphore_signal(self.runSemaphore);
                 dispatch_semaphore_wait(self.taskSemaphore, DISPATCH_TIME_FOREVER);
@@ -91,15 +104,18 @@ static const NSUInteger sizeOfQueue = 1500;
     [NSThread detachNewThreadSelector:@selector(startTaskThread) toTarget:self withObject:nil];
 }
 
-- (void)runTask:(RBSchedulerObject *)schedulerObject
+- (void)runTask:(BOOL (^)(void))schedulerBlock
 {
-    BOOL empty = [self.taskList isEmpty];
-    [self.taskList insertObject:schedulerObject];
-    if (empty) {
-        dispatch_semaphore_signal(self.taskSemaphore);
+    if (schedulerBlock) {
+        RBSchedulerObject *obj = [[RBSchedulerObject alloc] init];
+        obj.schedulerBlock = schedulerBlock;
+        BOOL empty = [self.taskList isEmpty];
+        [self.taskList insertObject:obj];
+        if (empty) {
+            dispatch_semaphore_signal(self.taskSemaphore);
+        }
     }
 }
-
 
 
 

@@ -38,7 +38,7 @@
     return self;
 }
 
-- (void)insertObject:(RBSaftLinkList *)obj
+- (void)insertObject:(NSObject *)obj
 {
     pthread_mutex_lock(&_mutex);
     if (_linkedList.count < _capacity) {
@@ -47,7 +47,7 @@
     pthread_mutex_unlock(&_mutex);
 }
 
-- (void)insertHeadOfList:(RBSaftLinkList *)obj
+- (void)insertHeadOfList:(NSObject *)obj
 {
     pthread_mutex_lock(&_mutex);
     if (_linkedList.count < _capacity) {
@@ -56,7 +56,7 @@
     pthread_mutex_unlock(&_mutex);
 }
 
-- (void)insertObject:(RBSaftLinkList *)obj atIndex:(NSUInteger)index
+- (void)insertObject:(NSObject *)obj atIndex:(NSUInteger)index
 {
     pthread_mutex_lock(&_mutex);
     if (_linkedList.count < _capacity) {
@@ -65,9 +65,9 @@
     pthread_mutex_unlock(&_mutex);
 }
 
-- (RBSaftLinkList *)dequeueObject
+- (NSObject *)dequeueObject
 {
-    RBSaftLinkList *obj = nil;
+    NSObject *obj = nil;
     pthread_mutex_lock(&_mutex);
     if (_linkedList.count < _capacity && ![self isEmpty]) {
         obj = [_linkedList firstObject];
@@ -77,7 +77,7 @@
     return obj;
 }
 
-- (void)removeObject:(RBSaftLinkList *)obj
+- (void)removeObject:(NSObject *)obj
 {
     pthread_mutex_lock(&_mutex);
     if ([_linkedList containsObject:obj]) {

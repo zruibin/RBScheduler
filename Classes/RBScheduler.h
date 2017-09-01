@@ -7,25 +7,26 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RBSchedulerObject.h"
 
 @interface RBScheduler : NSObject
 
 
 + (instancetype)sharedInstance;
 
-
 /**
- Start task scheduler
+ Start running the task scheduler.
  */
 - (void)run;
 
-
 /**
- Add and execute scheduling tasks
+ Add and execute scheduling tasks block.
 
- @param schedulerObject Task object
+ The return value of the scheduler block must be true, and then the scheduler can be continue running.
+ NOTE: Reference cycles can be caused!!!
+
+ @param schedulerBlock Task block
  */
-- (void)runTask:(RBSchedulerObject *)schedulerObject;
+- (void)runTask:(BOOL (^)(void))schedulerBlock;
+
 
 @end

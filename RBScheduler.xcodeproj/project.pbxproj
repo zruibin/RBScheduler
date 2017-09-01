@@ -15,7 +15,6 @@
 		E04BD8221F57FC94006CD8F3 /* RBSchedulerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E04BD8211F57FC94006CD8F3 /* RBSchedulerTests.m */; };
 		E04BD8711F5800EF006CD8F3 /* RBSaftLinkList.m in Sources */ = {isa = PBXBuildFile; fileRef = E04BD86C1F5800EF006CD8F3 /* RBSaftLinkList.m */; };
 		E04BD8721F5800EF006CD8F3 /* RBScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = E04BD86E1F5800EF006CD8F3 /* RBScheduler.m */; };
-		E04BD8731F5800EF006CD8F3 /* RBSchedulerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E04BD8701F5800EF006CD8F3 /* RBSchedulerObject.m */; };
 		E04BD8761F580BE5006CD8F3 /* TestController.m in Sources */ = {isa = PBXBuildFile; fileRef = E04BD8751F580BE5006CD8F3 /* TestController.m */; };
 /* End PBXBuildFile section */
 
@@ -46,8 +45,6 @@
 		E04BD86C1F5800EF006CD8F3 /* RBSaftLinkList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBSaftLinkList.m; sourceTree = "<group>"; };
 		E04BD86D1F5800EF006CD8F3 /* RBScheduler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBScheduler.h; sourceTree = "<group>"; };
 		E04BD86E1F5800EF006CD8F3 /* RBScheduler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBScheduler.m; sourceTree = "<group>"; };
-		E04BD86F1F5800EF006CD8F3 /* RBSchedulerObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBSchedulerObject.h; sourceTree = "<group>"; };
-		E04BD8701F5800EF006CD8F3 /* RBSchedulerObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBSchedulerObject.m; sourceTree = "<group>"; };
 		E04BD8741F580BE5006CD8F3 /* TestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestController.h; sourceTree = "<group>"; };
 		E04BD8751F580BE5006CD8F3 /* TestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -130,8 +127,6 @@
 				E04BD86C1F5800EF006CD8F3 /* RBSaftLinkList.m */,
 				E04BD86D1F5800EF006CD8F3 /* RBScheduler.h */,
 				E04BD86E1F5800EF006CD8F3 /* RBScheduler.m */,
-				E04BD86F1F5800EF006CD8F3 /* RBSchedulerObject.h */,
-				E04BD8701F5800EF006CD8F3 /* RBSchedulerObject.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -239,7 +234,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E04BD8731F5800EF006CD8F3 /* RBSchedulerObject.m in Sources */,
 				E04BD8761F580BE5006CD8F3 /* TestController.m in Sources */,
 				E04BD80F1F57FC94006CD8F3 /* ViewController.m in Sources */,
 				E04BD8721F5800EF006CD8F3 /* RBScheduler.m in Sources */,
