@@ -38,7 +38,7 @@
     return self;
 }
 
-- (void)insertObject:(NSObject *)obj
+- (void)appendObject:(NSObject *)obj
 {
     pthread_mutex_lock(&_mutex);
     if (_linkedList.count < _capacity) {
@@ -56,7 +56,7 @@
     pthread_mutex_unlock(&_mutex);
 }
 
-- (void)insertObject:(NSObject *)obj atIndex:(NSUInteger)index
+- (void)insertObject:(NSObject *)obj at:(NSUInteger)index
 {
     pthread_mutex_lock(&_mutex);
     if (_linkedList.count < _capacity) {

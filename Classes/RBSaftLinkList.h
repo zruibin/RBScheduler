@@ -31,11 +31,11 @@
 - (instancetype)initWithCapacity:(NSUInteger)numItems;
 
 /**
- Insert elements into the end of the queue
+ add elements into the end of the queue
 
  @param obj queue object
  */
-- (void)insertObject:(NSObject *)obj;
+- (void)appendObject:(NSObject *)obj;
 
 /**
  Insert an element into the header
@@ -50,7 +50,7 @@
  @param obj queue object
  @param index location
  */
-- (void)insertObject:(NSObject *)obj atIndex:(NSUInteger)index;
+- (void)insertObject:(NSObject *)obj at:(NSUInteger)index;
 
 /**
  dequeue

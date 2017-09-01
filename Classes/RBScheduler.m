@@ -110,7 +110,7 @@ static const NSUInteger sizeOfQueue = 1500;
         RBSchedulerObject *obj = [[RBSchedulerObject alloc] init];
         obj.schedulerBlock = schedulerBlock;
         BOOL empty = [self.taskList isEmpty];
-        [self.taskList insertObject:obj];
+        [self.taskList appendObject:obj];
         if (empty) {
             dispatch_semaphore_signal(self.taskSemaphore);
         }
