@@ -14,7 +14,7 @@
  The return value of the scheduler block must be true, and then the scheduler can be continue running.
  NOTE: Reference cycles can be caused!!!
  */
-@property (nonatomic, copy) BOOL (^ schedulerBlock)(void);
+@property(nonatomic, copy) void (^ schedulerBlock)(void);
 @end
 
 @implementation RBSchedulerObject
@@ -24,12 +24,15 @@
 
 static NSString * const SCHEDULER_QUEUE_NAME = @"scheduler.queue.RBScheduler";
 static const NSUInteger sizeOfQueue = 1500;
+static NSString * const TASK_QUEUE_NAME = @"serial.queue.RBScheduler";
 
 @interface RBScheduler ()
 
-@property(nonatomic, strong) RBSaftLinkList *taskList;
-@property(nonatomic, strong) dispatch_semaphore_t runSemaphore;
-@property(nonatomic, strong) dispatch_semaphore_t taskSemaphore;
+@property (assign, readwrite, getter=isExecuting) BOOL executing;
+@property (nonatomic, strong) RBSaftLinkList *taskList;
+@property (nonatomic, strong) dispatch_semaphore_t runSemaphore;
+@property (nonatomic, strong) dispatch_semaphore_t taskSemaphore;
+@property (nonatomic, strong) dispatch_queue_t dispatchTaskQueue;
 
 @end
 
@@ -64,6 +67,7 @@ static const NSUInteger sizeOfQueue = 1500;
         _taskList = [RBSaftLinkList CreateQueueWithCapacity:sizeOfQueue];
         _runSemaphore = dispatch_semaphore_create(1);
         _taskSemaphore = dispatch_semaphore_create(0);
+        _dispatchTaskQueue = dispatch_queue_create([TASK_QUEUE_NAME UTF8String], DISPATCH_QUEUE_SERIAL);
     }
     return self;
 }
@@ -86,9 +90,8 @@ static const NSUInteger sizeOfQueue = 1500;
             } else {
 //                __weak typeof(RBScheduler *) wself = self;
                 if (schedulerObj.schedulerBlock) {
-                    if (schedulerObj.schedulerBlock() == YES) {
-                        dispatch_semaphore_signal(self.runSemaphore);
-                    }
+                    schedulerObj.schedulerBlock();
+                    dispatch_semaphore_signal(self.runSemaphore);
                 } else {
                     dispatch_semaphore_signal(self.runSemaphore);
                 }
@@ -102,9 +105,10 @@ static const NSUInteger sizeOfQueue = 1500;
 - (void)run
 {
     [NSThread detachNewThreadSelector:@selector(startTaskThread) toTarget:self withObject:nil];
+    self.executing = YES;
 }
 
-- (void)runTask:(BOOL (^)(void))schedulerBlock
+- (void)runTask:(void (^)(void))schedulerBlock
 {
     if (schedulerBlock) {
         RBSchedulerObject *obj = [[RBSchedulerObject alloc] init];
@@ -117,6 +121,9 @@ static const NSUInteger sizeOfQueue = 1500;
     }
 }
 
-
+- (void)dispatchTask:(void (^)(void))schedulerBlock
+{
+    dispatch_async(_dispatchTaskQueue, schedulerBlock);
+}
 
 @end

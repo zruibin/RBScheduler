@@ -10,6 +10,7 @@
 
 @interface RBScheduler : NSObject
 
+@property (assign, readonly, getter=isExecuting) BOOL executing;
 
 + (instancetype)sharedInstance;
 
@@ -26,7 +27,14 @@
 
  @param schedulerBlock Task block
  */
-- (void)runTask:(BOOL (^)(void))schedulerBlock;
+- (void)runTask:(void (^)(void))schedulerBlock;
 
+
+/**
+ Dispatch task block into system serial queue
+
+ @param schedulerBlock Task block
+ */
+- (void)dispatchTask:(void (^)(void))schedulerBlock;
 
 @end

@@ -32,7 +32,7 @@
 {
     NSInteger i = 0;
     while (1) {
-        [[RBScheduler sharedInstance] runTask:^BOOL{
+        [[RBScheduler sharedInstance] runTask:^{
             [NSThread sleepForTimeInterval:2];
             NSLog(@"obj block run....");
             
@@ -43,7 +43,7 @@
                     NSString *string = [[NSString alloc] initWithData:data  encoding:NSUTF8StringEncoding];
                     NSLog(@"response: %@", string);
                     dispatch_semaphore_signal(taskSemaphore);
-                      
+                
                     dispatch_async(dispatch_get_main_queue(), ^{
                         int x = arc4random() % 100;
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"updateLabel" object:[NSNumber numberWithInt:x]];
@@ -52,7 +52,6 @@
             [task resume];
             dispatch_semaphore_wait(taskSemaphore, DISPATCH_TIME_FOREVER);
             NSLog(@"obj run over....");
-            return YES;
         }];
 //        [[RBScheduler sharedInstance] runTask:obj];
         ++i;
