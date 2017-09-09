@@ -104,8 +104,11 @@ static NSString * const TASK_QUEUE_NAME = @"serial.queue.RBScheduler";
 
 - (void)run
 {
-    [NSThread detachNewThreadSelector:@selector(startTaskThread) toTarget:self withObject:nil];
-    self.executing = YES;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [NSThread detachNewThreadSelector:@selector(startTaskThread) toTarget:self withObject:nil];
+        self.executing = YES;
+    });
 }
 
 - (void)runTask:(void (^)(void))schedulerBlock
