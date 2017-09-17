@@ -22,7 +22,6 @@
 /**
  Add and execute scheduling tasks block.
 
- The return value of the scheduler block must be true, and then the scheduler can be continue running.
  NOTE: Reference cycles can be caused!!!
 
  @param schedulerBlock Task block

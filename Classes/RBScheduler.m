@@ -11,7 +11,6 @@
 
 @interface RBSchedulerObject : NSObject
 /**
- The return value of the scheduler block must be true, and then the scheduler can be continue running.
  NOTE: Reference cycles can be caused!!!
  */
 @property(nonatomic, copy) void (^ schedulerBlock)(void);
@@ -88,7 +87,6 @@ static NSString * const TASK_QUEUE_NAME = @"serial.queue.RBScheduler";
                 dispatch_semaphore_signal(self.runSemaphore);
                 dispatch_semaphore_wait(self.taskSemaphore, DISPATCH_TIME_FOREVER);
             } else {
-//                __weak typeof(RBScheduler *) wself = self;
                 if (schedulerObj.schedulerBlock) {
                     schedulerObj.schedulerBlock();
                     dispatch_semaphore_signal(self.runSemaphore);
