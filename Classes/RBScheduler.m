@@ -20,7 +20,6 @@
 @end
 
 
-
 static NSString * const SCHEDULER_QUEUE_NAME = @"scheduler.queue.RBScheduler";
 static const NSUInteger sizeOfQueue = 1500;
 static NSString * const TASK_QUEUE_NAME = @"serial.queue.RBScheduler";
@@ -112,6 +111,9 @@ static NSString * const TASK_QUEUE_NAME = @"serial.queue.RBScheduler";
 - (void)runTask:(void (^)(void))schedulerBlock
 {
     if (schedulerBlock) {
+        if (self.isExecuting == NO) {
+            [self run];
+        }
         RBSchedulerObject *obj = [[RBSchedulerObject alloc] init];
         obj.schedulerBlock = schedulerBlock;
         BOOL empty = [self.taskList isEmpty];

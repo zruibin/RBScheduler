@@ -20,7 +20,7 @@ or use [CocoaPods](https://cocoapods.org) with Podfile:
 ``` ruby
 pod 'RBScheduler', :git => 'https://github.com/zruibin/RBScheduler.git'
 or
-pod 'RBScheduler', :git => 'https://github.com/zruibin/RBScheduler.git', :tag => '1.0.0'
+pod 'RBScheduler', :git => 'https://github.com/zruibin/RBScheduler.git', :tag => '2.1.1'
 ```
 
 or [Carthage](https://github.com/Carthage/Carthage) users can simply add to their `Cartfile`:
@@ -31,25 +31,16 @@ github "zruibin/RBScheduler"
 
 ## Usage
 
-1. runing the main Scheduler in `didFinishLaunchingWithOptions`
-
-```objective-c
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    [[RBScheduler sharedInstance] run];
-}
-```
-
-2. handle you mission or delayed mission in you code
+1. handle you mission or delayed mission in you code
 
 ```objective-c
 /*every mission, even delayed mission, but the return value of the scheduler block must be true, and then the scheduler can be continue running.
 
 NOTE: Reference cycles can be caused!!!
 */
-[[RBScheduler sharedInstance] runTask:^BOOL{
+[[RBScheduler sharedInstance] runTask:^{
     [NSThread sleepForTimeInterval:2];
     
-    return YES;
+	...
 }];
 ```
