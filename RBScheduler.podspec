@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name         = 'RBScheduler'
   s.summary      = 'RBScheduler SDK for iOS.'
-  s.version      = '2.1.1'
+  s.version      = '2.1.2'
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.authors      = { 'Ruibin.Chow' => 'ruibin.chow@qq.com' }
   s.social_media_url = 'https://www.zruibin.cn'
