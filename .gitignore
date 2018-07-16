@@ -46,6 +46,7 @@ DerivedData
 .idea/
 *.hmap
 .vscode
+RBScheduler-*
 
 #svn文件夹忽略
 .svn/
