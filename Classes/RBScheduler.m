@@ -79,6 +79,16 @@ static NSString * const TASK_QUEUE_NAME = @"serial.queue.RBScheduler";
     [[NSThread currentThread] setName:SCHEDULER_QUEUE_NAME];
     while (YES) {
         @autoreleasepool {
+            NSArray<RBSchedulerObject *> *taskList = (NSArray<RBSchedulerObject *> *)[self.taskList dequeueAllObject];
+            for (RBSchedulerObject *schedulerObj in taskList) {
+                if (schedulerObj.schedulerBlock) {
+                    schedulerObj.schedulerBlock();
+                }
+            }
+            if ([self.taskList isEmpty]) {
+                dispatch_semaphore_wait(self.taskSemaphore, DISPATCH_TIME_FOREVER);
+            }
+            /*
             dispatch_semaphore_wait(self.runSemaphore, DISPATCH_TIME_FOREVER);
             
             RBSchedulerObject *schedulerObj = (RBSchedulerObject *)[self.taskList dequeueObject];
@@ -93,6 +103,7 @@ static NSString * const TASK_QUEUE_NAME = @"serial.queue.RBScheduler";
                     dispatch_semaphore_signal(self.runSemaphore);
                 }
             }
+            //*/
         }
     }
 }

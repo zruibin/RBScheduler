@@ -60,6 +60,13 @@
 - (NSObject *)dequeueObject;
 
 /**
+ dequeue all object
+
+ @return object array
+*/
+- (NSArray<NSObject *> *)dequeueAllObject;
+
+/**
  Removing Elements
 
  @param obj queue object

@@ -69,12 +69,24 @@
 {
     NSObject *obj = nil;
     pthread_mutex_lock(&_mutex);
-    if (_linkedList.count < _capacity && ![self isEmpty]) {
+    if (![self isEmpty]) {
         obj = [_linkedList firstObject];
         [_linkedList removeObjectAtIndex:0];
     }
     pthread_mutex_unlock(&_mutex);
     return obj;
+}
+
+- (NSArray<NSObject *> *)dequeueAllObject
+{
+    NSArray<NSObject *> *copyList = nil;
+    pthread_mutex_lock(&_mutex);
+    if (![self isEmpty]) {
+        copyList = [NSArray arrayWithArray:[_linkedList copy]];
+        [_linkedList removeAllObjects];
+    }
+    pthread_mutex_unlock(&_mutex);
+    return copyList;
 }
 
 - (void)removeObject:(NSObject *)obj

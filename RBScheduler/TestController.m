@@ -33,9 +33,10 @@
     NSInteger i = 0;
     while (1) {
         [[RBScheduler sharedInstance] runTask:^{
-            [NSThread sleepForTimeInterval:2];
+//            [NSThread sleepForTimeInterval:1];
             NSLog(@"obj block run....");
-            
+            NSLog(@"i = %ld", i);
+            /*
             dispatch_semaphore_t taskSemaphore = dispatch_semaphore_create(0);
             NSURL *url = [NSURL URLWithString:@"http://zruibin.cc/api/tag_0.json"];
             NSURLSessionConfiguration *configure = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -51,11 +52,12 @@
             }];
             [task resume];
             dispatch_semaphore_wait(taskSemaphore, DISPATCH_TIME_FOREVER);
+            */
             NSLog(@"obj run over....");
         }];
 //        [[RBScheduler sharedInstance] runTask:obj];
         ++i;
-        if (i > 2) {
+        if (i > 5000) {
             NSLog(@"break...");
             break;
         }
